@@ -1,0 +1,328 @@
+.coverDiv {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 91vh;
+  background-color: #000000a1;
+  justify-content: center;
+  align-items: center;
+  z-index: 90;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease-in-out;
+}
+
+.coverDivOn {
+  animation: coverDivAnimationIn 0.2s;
+  display: flex;
+}
+
+.coverDivOff {
+  display: none;
+}
+
+.coverDivButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: min(32px, 10vw);
+  color: white;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+@keyframes coverDivAnimationIn {
+  0% {
+    backdrop-filter: blur(0px);
+    opacity: 0;
+  }
+
+  100% {
+    backdrop-filter: blur(10px);
+    opacity: 1;
+  }
+}
+
+.infoForm {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #3b3b3b39, 1px 1px 5px #a2a2a239 inset;
+  width: min(80%, 600px);
+  height: min(60%, 600px);
+  position: relative;
+  overflow: hidden;
+}
+
+.mainInfos {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+  position: absolute;
+}
+
+.mainInfosOut {
+  left: -100%;
+}
+
+.mainInfosIn {
+  left: 0;
+}
+
+.infoForm .mainInfos h1 {
+  font-size: min(32px, 6vw);
+  font-weight: 500;
+}
+
+.infoForm .mainInfos form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 70%;
+}
+
+.infoForm .mainInfos form .titleDiv input {
+  padding: 5px 15px;
+  border: 2px solid #000000;
+  border-radius: 100px;
+  font-family: Lalezar, Arial, sans-serif;
+  font-size: min(16px, 5vw);
+}
+
+.infoForm .mainInfos form .titleDiv .titleInput {
+  width: 100%;
+}
+
+.infoForm .mainInfos form .titleDiv .numberInput {
+  width: 20%;
+  min-width: 60px;
+}
+
+.infoForm .mainInfos form .titleDiv {
+  max-width: 70%;
+  display: flex;
+  gap: 10px;
+}
+
+.infoForm .mainInfos form textarea {
+  width: 70%;
+  padding: 5px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  font-family: Lalezar, Arial, sans-serif;
+  font-size: min(16px, 5vw);
+}
+
+.infoForm .mainInfos form button {
+  padding: 5px 15px;
+  border: 2px solid #000000;
+  border-radius: 100px;
+  font-family: Lalezar, Arial, sans-serif;
+  font-size: min(16px, 5vw);
+  cursor: pointer;
+}
+
+.addHabitButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: none;
+  background-color: transparent;
+  border-radius: 100px;
+  font-size: min(32px, 10vw);
+  cursor: pointer;
+  color: black;
+}
+
+.titleDiv .iconTaker {
+  border-radius: 100px;
+  border: #000000 solid 2px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: min(18px, 7vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconPickerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.iconPickerContainer::-webkit-scrollbar {
+  width: 5px;
+}
+
+.iconPickerContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.iconPickerContainer::-webkit-scrollbar-thumb {
+  background: #a4a4a4;
+  border-radius: 5px;
+}
+
+.iconPickerContainer .iconPickerDiv {
+  cursor: pointer;
+  font-size: min(24px, 7vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #00000039, 1px 1px 5px #a2a2a239 inset;
+  transition: all 0.2s ease-in-out;
+}
+
+.takerHead {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.takerHead .spaceHolder {
+  width: 15%;
+}
+
+.takerHead button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 50px;
+  border: solid 2px #000000;
+  outline: none;
+  font-family: Lalezar, sans-serif;
+  font-size: min(12px, 3vw);
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: white;
+}
+
+.takerHead button:hover {
+  transform: scale(1.05, 1.05);
+}
+
+.sideInfosDiv {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+  position: absolute;
+}
+
+.sideInfosDiv .content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sideInfosDivOut {
+  right: -100%;
+}
+
+.sideInfosDivIn {
+  right: 0;
+}
+
+.sideMissionsList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px 0;
+  width: 90%;
+}
+
+.sideMissionsList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sideMissionsList::-webkit-scrollbar-thumb {
+  background: #a4a4a4;
+  border-radius: 5px;
+}
+
+.addSideMissionBtn {
+  margin-top: 15px;
+  padding: 8px 20px;
+  border: 2px solid #000000;
+  border-radius: 100px;
+  font-family: Lalezar, Arial, sans-serif;
+  font-size: min(16px, 5vw);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sideMissionRow {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.sideMissionRow input {
+  padding: 5px 15px;
+  border: 2px solid #000000;
+  border-radius: 100px;
+  font-family: Lalezar, Arial, sans-serif;
+  font-size: min(16px, 5vw);
+}
+
+.sideMissionRow .nameInput {
+  width: 100%;
+}
+
+.sideMissionRow .importanceInput {
+  width: 20%;
+  min-width: 60px;
+}
+
+.deleteSideMissionBtn {
+  border: none;
+  background: transparent;
+  color: #ff4d4d;
+  font-size: min(24px, 6vw);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.deleteSideMissionBtn:hover {
+  transform: scale(1.1);
+  color: red;
+}

@@ -1,0 +1,53 @@
+.sideTask {
+    position: relative;
+    display: flex;
+    gap: 5px;
+    border-bottom: #000000 solid 2px;
+    cursor: pointer;
+}
+
+.sideTask .main {
+    display: flex;
+    width: 80%;
+    min-height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    overflow-x: hidden;
+    background-color: transparent;
+    box-shadow: inset -1px -1px 15px #0000003d;
+    transition: all 0.3s ease-in-out;
+}
+
+.sideTask .main:hover {
+    box-shadow: inset -1px -1px 5px #ddff005b;
+}
+
+.sideTask .main .titleDiv {
+    max-width: 70%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: min(21px, 4vw);
+    font-weight: 400;
+}
+
+.sideTask .main p {
+    font-size: min(21px, 4vw);
+    font-weight: 600;
+}
+
+.sideTask .note {
+    font-size: min(32px, 5vw);
+    min-width: 20%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: solid 1px #000000;
+    background-color: #eeeeee;
+    font-weight: 800;
+}

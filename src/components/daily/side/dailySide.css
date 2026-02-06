@@ -1,0 +1,18 @@
+.dailySide{
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    min-width: min(30vw, 300px);
+    box-shadow: -1px 1px 3px 0 #00000055;
+    overflow-y: scroll;
+}
+.dailySide::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+}
+.dailySide::-webkit-scrollbar-thumb{
+    background-color: #00000055;
+    border-radius: 10px;
+}

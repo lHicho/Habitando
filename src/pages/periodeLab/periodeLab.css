@@ -1,0 +1,303 @@
+.periodeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+    background-color: transparent;
+}
+
+.periodeCard {
+    background: white;
+    padding: 5vw;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 3vw;
+}
+
+.mainPeriode {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 250px;
+    max-height: 250px;
+    margin-bottom: 25px;
+    gap: 5vw;
+    width: 100%;
+}
+
+.periodeTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+
+.periodeSubtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.sectionTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4b5563;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 0.2rem;
+    margin-top: 0;
+    text-align: center;
+}
+
+/* Inputs */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: min(10px, 2vw);
+}
+
+.inputField label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    margin-left: 2px;
+}
+
+.inputField input {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    outline: none;
+    background-color: #f9fafb;
+    color: #1f2937;
+    width: 100%;
+}
+
+.inputField input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    background-color: white;
+}
+
+/* Habit List */
+.habit-selection-group {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.habitsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-right: 5px;
+    margin-top: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    padding: 5px 1px;
+}
+
+.habitsList::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+}
+
+.habitsList::-webkit-scrollbar-thumb {
+    background-color: #0000007e;
+    border-radius: 10px;
+}
+
+.habitItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    transition: all 0.2s;
+    cursor: pointer;
+    background-color: white;
+}
+
+.habitItem:hover {
+    background-color: #f9fafb;
+    border-color: #e5e7eb;
+}
+
+.habitItem.selected {
+    background-color: #eef2ff;
+    border-color: #6366f1;
+}
+
+.habitInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.habitInfo span {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.95rem;
+}
+
+.habitItem.selected,
+.habitItem.selected span {
+    color: #6366f1;
+    background: #e0e7ff;
+}
+
+/* Actions */
+.actionButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.primaryBtn {
+    flex: 1;
+    max-width: 200px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.primaryBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.secondaryBtn {
+    flex: 1;
+    max-width: 150px;
+    background: white;
+    color: #4b5563;
+    border: 2px solid #e5e7eb;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.secondaryBtn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.confirmationContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.summarySection {
+    background: #f9fafb;
+    padding: min(20px, 2.5vw);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.summarySection::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+}
+
+.summarySection::-webkit-scrollbar-thumb {
+    background-color: #0000007e;
+    border-radius: 10px;
+}
+
+.summarySection h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    margin: 0;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.6rem;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #1f2937;
+}
+
+.summaryRow span:last-child {
+    font-weight: 600;
+}
+
+.missionsSummaryList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.missionSummaryItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.importanceBadge {
+    margin-left: auto;
+    background: #eef2ff;
+    color: #6366f1;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .configLayout {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .periodeCard {
+        padding: 1.5rem;
+    }
+
+    .periodeTitle {
+        font-size: 1.75rem;
+    }
+}

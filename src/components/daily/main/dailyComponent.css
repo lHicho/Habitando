@@ -1,0 +1,29 @@
+.compo{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: solid 1px #000000;
+}
+.compo .compoText {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    border-right: #000000 2px solid;
+}
+.compo input{
+    width: 30%;
+    font-size: min(27px, 4vw);
+    font-family: Lalezar;
+    border: none;
+    outline: none;
+    text-align: center;
+    padding: 5px 0;
+}
+.compo .compoText h1{
+    font-size: min(27px, 4vw);
+}
+.compo .compoText p{
+    font-size: min(21px, 3vw);
+}

@@ -1,0 +1,33 @@
+.head{
+    display: flex;
+    max-width: max(70vw, calc(100vw - 300px));
+    max-height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+    box-shadow:  0 1px 3px 0 #00000055;
+}
+.head .info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: min(22px, 4vw);
+    gap: 15px;
+}
+.head .info .textDiv{
+    display: flex;
+    flex-direction: column;
+    
+}
+.head .info .textDiv h1{
+    font-size: min(27px, 4vw);
+    font-weight: 700;
+}
+.head .info .textDiv p{
+    font-size: min(16px, 1vw);
+    font-weight: 400;
+}
+.head .text{
+    font-size: min(16px, 1vw);
+    font-weight: 400;
+}

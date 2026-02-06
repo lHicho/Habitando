@@ -1,0 +1,86 @@
+.mainDiv {
+    width: 40vw;
+    margin: 0.5vh 15vw;
+    height: 79vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+    position: relative;
+    gap: 20px;
+}
+
+.mainDiv::-webkit-scrollbar {
+    width: 5px;
+}
+
+.mainDiv::-webkit-scrollbar-thumb {
+    width: 5px;
+    background-color: #00000055;
+    border-radius: 10px;
+}
+
+.score-display {
+    background: #f3f4f6;
+    padding: 15px 30px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 80%;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.score-display span:first-child {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.score-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #6366f1;
+    line-height: 1;
+}
+
+.inputs-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    /* Removed flex: 1 to allow natural flow */
+}
+
+.confirm-daily-btn {
+    margin-top: auto;
+    /* Push to bottom if space permits, or just flow */
+    margin-bottom: 20px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+    transition: all 0.2s ease;
+    width: 80%;
+    max-width: 300px;
+}
+
+.confirm-daily-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
+}
+
+.confirm-daily-btn:active {
+    transform: translateY(0);
+}

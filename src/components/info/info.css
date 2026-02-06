@@ -1,0 +1,38 @@
+.infoDiv{
+    padding: 20px;
+    box-shadow: 1px 1px 5px #3b3b3b39, 1px 1px 5px #a2a2a239 inset;
+    border-radius: 10px;
+    width: 100%;
+}
+.infoDiv h1{
+    font-size: min(32px, 6vw);
+    font-weight: 500;
+}
+
+.infoDiv p{
+    font-size: min(16px, 3vw);
+    font-weight: 500;
+}
+.infoDiv h2{
+    font-size: min(10vw, 64px);
+    text-align: center;
+    font-weight: 400;
+}
+.infoDivCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.infoDiv .inofTools{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+.infoDiv .inofTools button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: min(18px, 5vw);
+}
