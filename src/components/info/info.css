@@ -1,38 +1,72 @@
-.infoDiv{
+.infoDiv {
     padding: 20px;
-    box-shadow: 1px 1px 5px #3b3b3b39, 1px 1px 5px #a2a2a239 inset;
-    border-radius: 10px;
+    background: var(--bg-card);
+    border-radius: 12px;
     width: 100%;
-}
-.infoDiv h1{
-    font-size: min(32px, 6vw);
-    font-weight: 500;
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    color: var(--text-main);
 }
 
-.infoDiv p{
-    font-size: min(16px, 3vw);
+.infoDiv:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
+}
+
+.infoDiv h1 {
+    font-size: min(32px, 6vw);
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.infoDiv p {
+    font-size: 1rem;
     font-weight: 500;
+    color: var(--text-secondary);
 }
-.infoDiv h2{
-    font-size: min(10vw, 64px);
+
+.infoDiv h2 {
+    font-size: min(10vw, 48px);
     text-align: center;
-    font-weight: 400;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 1rem;
 }
-.infoDivCont{
+
+.infoDivCont {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
-.infoDiv .inofTools{
+
+.infoDiv .inofTools {
     display: flex;
     justify-content: end;
     align-items: center;
     gap: 10px;
+    margin-bottom: 0.5rem;
 }
-.infoDiv .inofTools button{
+
+.infoDiv .inofTools button {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    font-size: min(18px, 5vw);
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.infoDiv .inofTools button:hover {
+    color: var(--primary);
+    background-color: var(--bg-main);
 }

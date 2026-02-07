@@ -1,9 +1,15 @@
 .sideTask {
     position: relative;
     display: flex;
-    gap: 5px;
-    border-bottom: #000000 solid 2px;
+    gap: 0;
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
+    background-color: var(--bg-card);
+    transition: background-color 0.2s ease;
+}
+
+.sideTask:hover {
+    background-color: var(--bg-main);
 }
 
 .sideTask .main {
@@ -12,16 +18,14 @@
     min-height: 100%;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 10px;
+    padding: 12px 10px;
     overflow-x: hidden;
     background-color: transparent;
-    box-shadow: inset -1px -1px 15px #0000003d;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    color: var(--text-main);
 }
 
-.sideTask .main:hover {
-    box-shadow: inset -1px -1px 5px #ddff005b;
-}
+
 
 .sideTask .main .titleDiv {
     max-width: 70%;
@@ -29,25 +33,30 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: min(21px, 4vw);
-    font-weight: 400;
+    font-size: min(18px, 4vw);
+    font-weight: 500;
 }
 
 .sideTask .main p {
-    font-size: min(21px, 4vw);
+    font-size: 0.9rem;
     font-weight: 600;
+    color: var(--text-secondary);
 }
 
 .sideTask .note {
-    font-size: min(32px, 5vw);
-    min-width: 20%;
-    height: 100%;
+    font-size: 1.2rem;
+    width: 20%;
+    /* Fixed width */
+    min-height: 100%;
     position: absolute;
     right: 0;
+    top: 0;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-left: solid 1px #000000;
-    background-color: #eeeeee;
-    font-weight: 800;
+    border-left: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+    color: var(--primary);
+    font-weight: 700;
 }

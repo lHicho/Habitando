@@ -12,54 +12,80 @@ import Header from "./components/header/header"
 import Sidebar from "./components/sidebar/sidebar"
 import Habits from "./components/habits/habits.jsx"
 import PeriodeLab from "./pages/periodeLab/periodeLab.jsx"
+import ProgressLab from "./pages/progressLab/progressLab.jsx"
 
 import { Toaster } from "react-hot-toast"
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
+import { ThemeProvider } from "./context/themeContext.jsx"
+
+const Layout = () => {
+    return (
+        <div className="app-layout">
+            <Header />
+            <Sidebar />
+            <main style={{ marginTop: '9vh', height: '91vh', overflowY: 'auto' , position: 'relative'}}>
+                <Outlet />
+            </main>
+        </div>
+    )
+}
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
-        errorElement: <div>404</div>
+        element: <Layout />,
+        errorElement: <div>404</div>,
+        children: [
+            {
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "/daily",
+                element: <Daily />
+            },
+            {
+                path: "/resume",
+                element: <Resume />
+            },
+            {
+                path: "/profile",
+                element: <UserInfo />
+            },
+            {
+                path: "/habits",
+                element: <Habits />
+            },
+            {
+                path: "/periodeLab",
+                element: <PeriodeLab />
+            },
+            {
+                path: "/progressLab",
+                element: <ProgressLab />
+            }
+        ]
     },
     {
         path: "/signin",
         element: <SignIn />
     },
     {
-        path: "/daily",
-        element: <Daily />
-    },
-    {
         path: "/regester",
         element: <CreatAccount />
-    },
-    {
-        path: "/resume",
-        element: <Resume />
-    },
-    {
-        path: "/profile",
-        element: <UserInfo />
-    }, {
-        path: "/habits",
-        element: <Habits />
-    }, {
-        path: "/periodeLab",
-        element: <PeriodeLab />
     }
 ])
 
 export default function App() {
-
-
     return (
-        <SidebarProvider>
-            <UserProvider>
-                <Toaster position="top-right" />
-                <RouterProvider router={router} />
-            </UserProvider>
-        </SidebarProvider>
+        <ThemeProvider>
+            <SidebarProvider>
+                <UserProvider>
+                    <Toaster position="top-right" />
+                    <RouterProvider router={router} />
+                </UserProvider>
+            </SidebarProvider>
+        </ThemeProvider>
     )
 }

@@ -8,37 +8,37 @@
 }
 
 .periodeCard {
-    background: white;
-    padding: 5vw;
+    background: var(--bg-card);
+    padding: 2.5rem;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 40px var(--shadow-color);
     width: 100%;
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    gap: 3vw;
+    gap: 1.5rem;
+    border: 1px solid var(--border-color);
 }
 
 .mainPeriode {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    height: 250px;
-    max-height: 250px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    min-height: 250px;
     margin-bottom: 25px;
-    gap: 5vw;
+    gap: 2rem;
     width: 100%;
 }
 
 .periodeTitle {
     font-size: 2rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-main);
     margin-bottom: 0.2rem;
     text-align: center;
 }
 
 .periodeSubtitle {
-    color: #666;
+    color: var(--text-secondary);
     text-align: center;
     margin-bottom: 1rem;
     font-size: 1rem;
@@ -48,11 +48,12 @@
 .sectionTitle {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #4b5563;
-    border-bottom: 2px solid #f3f4f6;
-    padding-bottom: 0.2rem;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
     margin-top: 0;
     text-align: center;
+    margin-bottom: 1rem;
 }
 
 /* Inputs */
@@ -61,39 +62,37 @@
     flex-direction: column;
     gap: 20px;
     height: 100%;
-    overflow-y: auto;
 }
 
 .inputField {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: min(10px, 2vw);
+    flex-direction: column;
+    gap: 5px;
 }
 
 .inputField label {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    color: #374151;
+    color: var(--text-main);
     margin-left: 2px;
 }
 
 .inputField input {
     padding: 12px 16px;
     border-radius: 12px;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--border-color);
     font-size: 0.95rem;
     transition: all 0.2s ease;
     outline: none;
-    background-color: #f9fafb;
-    color: #1f2937;
+    background-color: var(--bg-main);
+    color: var(--text-main);
     width: 100%;
 }
 
 .inputField input:focus {
-    border-color: #6366f1;
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    background-color: white;
+    background-color: var(--bg-card);
 }
 
 /* Habit List */
@@ -101,6 +100,8 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    height: 300px;
+    /* specific height for scroll */
 }
 
 .habitsList {
@@ -108,7 +109,6 @@
     flex-direction: column;
     gap: 0.5rem;
     padding-right: 5px;
-    margin-top: 20px;
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
@@ -121,7 +121,8 @@
 }
 
 .habitsList::-webkit-scrollbar-thumb {
-    background-color: #0000007e;
+    background-color: var(--text-secondary);
+    opacity: 0.5;
     border-radius: 10px;
 }
 
@@ -130,21 +131,22 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px;
-    border: 1px solid #f3f4f6;
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     transition: all 0.2s;
     cursor: pointer;
-    background-color: white;
+    background-color: var(--bg-card);
 }
 
 .habitItem:hover {
-    background-color: #f9fafb;
-    border-color: #e5e7eb;
+    background-color: var(--bg-main);
+    border-color: var(--text-secondary);
 }
 
 .habitItem.selected {
-    background-color: #eef2ff;
-    border-color: #6366f1;
+    background-color: rgba(99, 102, 241, 0.1);
+    /* light primary tint */
+    border-color: var(--primary);
 }
 
 .habitInfo {
@@ -156,14 +158,12 @@
 
 .habitInfo span {
     font-weight: 600;
-    color: #374151;
+    color: var(--text-main);
     font-size: 0.95rem;
 }
 
-.habitItem.selected,
 .habitItem.selected span {
-    color: #6366f1;
-    background: #e0e7ff;
+    color: var(--primary);
 }
 
 /* Actions */
@@ -177,7 +177,7 @@
 .primaryBtn {
     flex: 1;
     max-width: 200px;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
     border: none;
     padding: 14px;
@@ -196,9 +196,9 @@
 .secondaryBtn {
     flex: 1;
     max-width: 150px;
-    background: white;
-    color: #4b5563;
-    border: 2px solid #e5e7eb;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border: 2px solid var(--border-color);
     padding: 14px;
     border-radius: 12px;
     font-weight: 600;
@@ -208,8 +208,9 @@
 }
 
 .secondaryBtn:hover {
-    background: #f9fafb;
-    border-color: #d1d5db;
+    background: var(--bg-main);
+    border-color: var(--text-secondary);
+    color: var(--text-main);
 }
 
 .confirmationContent {
@@ -219,14 +220,14 @@
 }
 
 .summarySection {
-    background: #f9fafb;
-    padding: min(20px, 2.5vw);
+    background: var(--bg-main);
+    padding: 20px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    height: 100%;
-    overflow-y: scroll;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .summarySection::-webkit-scrollbar {
@@ -235,7 +236,8 @@
 }
 
 .summarySection::-webkit-scrollbar-thumb {
-    background-color: #0000007e;
+    background-color: var(--text-secondary);
+    opacity: 0.5;
     border-radius: 10px;
 }
 
@@ -243,9 +245,9 @@
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #6b7280;
+    color: var(--text-secondary);
     margin: 0;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.6rem;
 }
 
@@ -253,7 +255,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.95rem;
-    color: #1f2937;
+    color: var(--text-main);
 }
 
 .summaryRow span:last-child {
@@ -270,16 +272,17 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: white;
+    background: var(--bg-card);
     padding: 8px 12px;
     border-radius: 8px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
 }
 
 .importanceBadge {
     margin-left: auto;
-    background: #eef2ff;
-    color: #6366f1;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
     padding: 2px 8px;
     border-radius: 99px;
     font-size: 0.75rem;
@@ -288,9 +291,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .configLayout {
-        flex-direction: column;
-        gap: 2rem;
+    .mainPeriode {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
     }
 
     .periodeCard {
@@ -299,5 +303,10 @@
 
     .periodeTitle {
         font-size: 1.75rem;
+    }
+
+    .habit-selection-group {
+        height: auto;
+        max-height: 300px;
     }
 }

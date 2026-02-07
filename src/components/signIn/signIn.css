@@ -1,81 +1,128 @@
-.signIn{
+.signIn {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     align-self: center;
     justify-self: center;
-    z-index: 50px;
-    background: linear-gradient(#ffffff , #ffbc90);
+    z-index: 50;
+    background: var(--bg-main);
+    color: var(--text-main);
+    padding: 20px;
 }
-.signIn h1{
+
+.signIn h1 {
     font-size: min(32px, 5vw);
     font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
 }
-.signIn form{
+
+.signIn form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    min-height: 50%;
-    background-color: #ffffffb0;
-    padding: 0 20px;
-    border-radius: 10px;
-    border: solid #000000 2px;
+    background-color: var(--bg-card);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px var(--shadow-color);
+    width: 100%;
+    max-width: 500px;
+    gap: 1.5rem;
 }
-.signIn form h2{
-    font-size: min(25px, 4vw);
+
+.signIn form h2 {
+    font-size: 1.5rem;
     font-weight: 700;
+    color: var(--text-main);
 }
-.signIn form .inputCont input{
-    width: min(500px, 80vw);
-    padding: 5px 15px;
-    font-size: min(16px, 3vw);
-    border-radius: 100px;
-    border: 2px solid #000000;
-    background-color: #ffffff;
-    color: #000000;
-    font-family: Lalezar, sans-serif;
+
+.signIn .inputCont {
+    position: relative;
+    width: 100%;
+}
+
+.signIn form input:not([type="checkbox"]) {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Inter', 'Lalezar', sans-serif;
     outline: none;
+    transition: border-color 0.2s;
 }
-.signIn form button{
-    padding: 5px 15px;
-    font-size: min(16px, 3vw);
-    font-family: Lalezar, sans-serif;
+
+.signIn form input:focus {
+    border-color: var(--primary);
+}
+
+.signIn .inputCont svg {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.signIn form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-family: 'Inter', 'Lalezar', sans-serif;
     cursor: pointer;
-    font-weight: 400;
-    background-color: #ffffff;
-    border: solid 2px #000000;
-    border-radius: 100px;
-    transition: ease-out 0.3s;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
 }
-.signIn form button:hover{
-    background-color: #ffe5d4;
-    transform: scale(1.05, 1.05);
+
+.signIn form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-.signIn form button:active{
-    background-color: #ffffff;
-    transform: scale(0.95, 0.95);
+
+.signIn form button:active {
+    transform: translateY(0);
 }
 
 .signIn form p {
-    font-size: min(16px, 3vw);
+    font-size: 0.9rem;
     font-weight: 400;
+    color: var(--text-secondary);
+    text-align: center;
 }
 
-.signIn form p a{
-    color: #ff6600;
+.signIn form p a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
 }
-.signIn .inputCont{
-    padding: 0;
-    position: relative;
-    font-size: min(20px, 6vw);
+
+.signIn form p a:hover {
+    text-decoration: underline;
 }
-.signIn .inputCont svg{
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    transform: translate(-50%, -50%);
+
+.rememberMeCont {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    width: 100%;
+    margin-top: -10px;
+}
+
+.rememberMeCont input {
+    width: auto !important;
+    accent-color: var(--primary);
 }

@@ -19,7 +19,6 @@ export default function Habits() {
 
     return (
         <>
-            <Header />
             <div className="bigContainer">
                 <div className="infoContainer">
                     {habits.map((habit) => (
@@ -27,9 +26,8 @@ export default function Habits() {
                     ))}
                 </div>
             </div>
-            <button className="addHabitButton" onClick={() => {openHabitTaker(); setEdit(false)}}><FiPlusCircle /></button>
+            <button className="addHabitButton" onClick={() => { openHabitTaker(); setEdit(false) }}><FiPlusCircle /></button>
             <HabitTaker edit={edit} />
-            <SideBar />
         </>
     )
 }

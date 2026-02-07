@@ -1,29 +1,63 @@
-.compo{
+.compo {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    border: solid 1px #000000;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.compo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
 .compo .compoText {
     width: 70%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
-    border-right: #000000 2px solid;
+    padding: 10px 15px;
+    border-right: 1px solid var(--border-color);
+    color: var(--text-main);
 }
-.compo input{
+
+.compo input {
     width: 30%;
-    font-size: min(27px, 4vw);
-    font-family: Lalezar;
+    font-size: 1.2rem;
+    font-family: 'Inter', 'Lalezar', sans-serif;
     border: none;
     outline: none;
     text-align: center;
-    padding: 5px 0;
+    padding: 10px 0;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 700;
 }
-.compo .compoText h1{
-    font-size: min(27px, 4vw);
+
+/* Remove Arrows/Spinners from number input */
+.compo input::-webkit-outer-spin-button,
+.compo input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
-.compo .compoText p{
-    font-size: min(21px, 3vw);
+
+.compo input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.compo .compoText h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.compo .compoText p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: var(--bg-main);
+    padding: 2px 8px;
+    border-radius: 6px;
 }

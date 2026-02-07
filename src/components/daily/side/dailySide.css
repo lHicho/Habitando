@@ -1,18 +1,25 @@
-.dailySide{
+.dailySide {
     background-color: transparent;
+    /* Or maybe var(--bg-card) if you want it distinct */
     position: absolute;
     right: 0;
     top: 0;
     height: 100%;
     min-width: min(30vw, 300px);
-    box-shadow: -1px 1px 3px 0 #00000055;
+    box-shadow: -1px 0 10px var(--shadow-color);
     overflow-y: scroll;
+    border-left: 1px solid var(--border-color);
+    background: var(--bg-card);
+    /* Added background for better separation */
 }
-.dailySide::-webkit-scrollbar{
+
+.dailySide::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
-.dailySide::-webkit-scrollbar-thumb{
-    background-color: #00000055;
+
+.dailySide::-webkit-scrollbar-thumb {
+    background-color: var(--text-secondary);
+    opacity: 0.5;
     border-radius: 10px;
 }

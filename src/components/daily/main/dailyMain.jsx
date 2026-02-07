@@ -57,16 +57,19 @@ export default function DailyMain() {
     }, [selectedHabit, missionRatings]);
 
     const handleRatingChange = (missionName, value) => {
-        const val = parseFloat(value);
-        if (isNaN(val)) {
-            // Handle empty string to allow clearing input
-            if (value === "") {
-                const newRatings = { ...missionRatings };
-                delete newRatings[missionName];
-                setMissionRatings(newRatings);
-            }
+        // Handle empty string to allow clearing input
+        if (value === "") {
+            const newRatings = { ...missionRatings };
+            delete newRatings[missionName];
+            setMissionRatings(newRatings);
             return;
         }
+
+        const val = parseFloat(value);
+        if (isNaN(val)) return;
+
+        // Enforce 0-100 range
+        if (val < 0 || val > 100) return;
 
         const newRatings = { ...missionRatings, [missionName]: val };
         setMissionRatings(newRatings);

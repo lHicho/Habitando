@@ -5,7 +5,9 @@
     z-index: 100;
     padding: 0;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: var(--bg-sidebar);
+    box-shadow: 2px 0 10px var(--shadow-color);
+    transition: background-color 0.3s ease, left 0.6s ease;
 }
 
 .on {
@@ -27,7 +29,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px min(25px, 4vw);
-    border-bottom: 2px #000 solid;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .header img {
@@ -46,12 +48,15 @@
     align-items: center;
     justify-content: center;
     font-size: min(32px, 6vw);
-    color: #ff3c00;
+    color: var(--danger);
 }
 
 .sidebar .container {
     display: flex;
+    flex-direction: column;
+    /* Ensure vertical stacking if needed */
     padding: 10px min(25px, 4vw);
+    color: var(--text-main);
 }
 
 .overflowDiv {
@@ -67,8 +72,8 @@
 
 .overflowOn {
     display: block;
-    backdrop-filter: blur(10px);
-    background-color: #00000044;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.4);
     animation: overOn 0.6s ease;
 }
 
@@ -116,16 +121,16 @@
 
     to {
         display: block;
-        backdrop-filter: blur(10px);
-        background-color: #00000044;
+        backdrop-filter: blur(5px);
+        background-color: rgba(0, 0, 0, 0.4);
     }
 }
 
 @keyframes overOff {
     from {
         display: block;
-        backdrop-filter: blur(10px);
-        background-color: #00000044;
+        backdrop-filter: blur(5px);
+        background-color: rgba(0, 0, 0, 0.4);
     }
 
     to {
@@ -140,7 +145,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border-bottom: solid #000000 2px;
+    border-bottom: solid var(--border-color) 2px;
 }
 
 .acount img {
@@ -148,11 +153,12 @@
     max-height: 100px;
     border-radius: 50%;
     width: min(60px, 7vw);
-    outline: 3px #000000 solid;
+    outline: 3px var(--text-main) solid;
     border: transparent 2px solid;
 }
 
 .acount h1 {
     font-size: min(4vw, 32px);
     font-weight: 700;
+    color: var(--text-main);
 }

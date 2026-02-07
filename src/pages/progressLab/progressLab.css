@@ -1,0 +1,154 @@
+.progressLab {
+    min-height: 100vh;
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center content */
+    padding-left: 250px;
+    /* Sidebar offset */
+    box-sizing: border-box;
+}
+
+.progress-container {
+    width: 95%;
+    max-width: 1200px;
+    margin-top: 50px;
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.header-text {
+    margin-bottom: 2rem;
+}
+
+.header-text h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.header-text p {
+    color: var(--text-secondary);
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    color: var(--text-secondary);
+}
+
+/* Table Wrapper for horizontal scroll if needed */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    /* Custom Scrollbar styling could go here */
+}
+
+.heatmap-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+    /* Gap between cells */
+    min-width: 800px;
+    /* Ensure it doesn't squish too much */
+}
+
+.heatmap-table th,
+.heatmap-table td {
+    text-align: center;
+    padding: 0;
+}
+
+/* Sticky First Column */
+.sticky-col {
+    position: sticky;
+    left: 0;
+    background-color: var(--bg-card);
+    /* Match card background to cover scrolling items */
+    z-index: 10;
+    text-align: left !important;
+    padding-right: 1rem !important;
+}
+
+/* Header Cells */
+.date-header {
+    padding-bottom: 0.5rem;
+}
+
+.day-name {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.day-num {
+    font-size: 1rem;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.first-col-header .empty-corner {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 10px;
+}
+
+/* Habit Rows */
+.habit-col {
+    width: 200px;
+}
+
+.habit-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Heatmap Boxes */
+.heatmap-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: transform 0.2s ease;
+    cursor: default;
+}
+
+.heatmap-box:hover {
+    transform: scale(1.1);
+}
+
+/* Footer / Overall */
+.overall-row td {
+    padding-top: 1rem;
+}
+
+.overall-col {
+    font-weight: 800;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    padding-top: 1rem !important;
+}
+
+.overall-box {
+    width: 40px;
+    height: 40px;
+    /* Bit taller */
+}

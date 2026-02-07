@@ -1,8 +1,8 @@
 import "./signIn.css"
 
 import { useUser } from "../../context/userContext"
-import { useSidebar } from "../../context/sideContext" 
-import { useState } from "react"
+import { useSidebar } from "../../context/sideContext"
+import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-hot-toast"
 
@@ -17,21 +17,48 @@ export default function SignIn() {
 
     const [signData, setSignData] = useState({
         email: '',
-        password: ''
+        password: '',
+        rememberMe: false
     })
 
+    useEffect(() => {
+        const savedEmail = localStorage.getItem('habitando-email');
+        const savedPassword = localStorage.getItem('habitando-password'); // Warning: Saving password in local storage is unsafe for production apps.
+
+        if (savedEmail && savedPassword) {
+            setSignData(prev => ({
+                ...prev,
+                email: savedEmail,
+                password: savedPassword,
+                rememberMe: true
+            }));
+
+            // Auto-login logic
+            const performAutoLogin = async () => {
+                const respnce = await signIn(savedEmail, savedPassword)
+                if (respnce == 200) {
+                    updateInfo(savedEmail)
+                    toast.success("Welcome back!")
+                    stayFunc()
+                    navigate('/')
+                }
+            };
+            performAutoLogin();
+        }
+    }, [signIn, updateInfo, stayFunc, navigate]);
+
     const handleChange = (e) => {
-        const { name, value } = e.target
+        const { name, value, type, checked } = e.target
         setSignData(prev => ({
             ...prev,
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         }))
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (signData.email == "" || signData.password == "") {
-            toast.error("Please fill bothe fields.")
+            toast.error("Please fill both fields.")
         } else {
             if (signData.password.length < 8) {
                 toast.error("Password should be at least 8.")
@@ -42,6 +69,15 @@ export default function SignIn() {
                 } else if (respnce == 200) {
                     updateInfo(signData.email)
                     toast.success("Signed in succesfully")
+
+                    if (signData.rememberMe) {
+                        localStorage.setItem('habitando-email', signData.email);
+                        localStorage.setItem('habitando-password', signData.password);
+                    } else {
+                        localStorage.removeItem('habitando-email');
+                        localStorage.removeItem('habitando-password');
+                    }
+
                     stayFunc()
                     navigate('/')
                 } else if (respnce == 300) {
@@ -84,7 +120,19 @@ export default function SignIn() {
                     <RiLockPasswordLine />
                 </div>
 
-                <p>If you don't have an account yet creat one <Link to="/regester">Here</Link>.</p>
+                <div className="rememberMeCont" style={{ display: 'flex', alignItems: 'center', gap: '8px', alignSelf: 'flex-start', marginLeft: '10px' }}>
+                    <input
+                        type="checkbox"
+                        name="rememberMe"
+                        checked={signData.rememberMe}
+                        onChange={handleChange}
+                        id="rememberMe"
+                        style={{ width: 'auto' }}
+                    />
+                    <label htmlFor="rememberMe" style={{ fontSize: '0.9rem', color: 'var(--text-main)', cursor: 'pointer' }}>Remember me</label>
+                </div>
+
+                <p>If you don't have an account yet create one <Link to="/regester">Here</Link>.</p>
 
                 <button type="submit">Sign In</button>
             </form>

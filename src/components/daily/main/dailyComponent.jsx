@@ -10,6 +10,8 @@ export default function DailyComponent({ text, importance, value, onChange, onBl
             <input
                 ref={inputRef}
                 type="number"
+                min="0"
+                max="100"
                 value={value !== undefined ? value : ''}
                 onChange={(e) => onChange(e.target.value)}
                 onBlur={onBlur}
