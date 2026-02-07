@@ -6,24 +6,23 @@ import IconGenerator from "../../components/iconGenerator";
 import "./progressLab.css";
 
 export default function ProgressLab() {
-    const { activePeriod } = useUser();
+    const { activePeriod, userInfo } = useUser();
     const [dailyRatings, setDailyRatings] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // 1. Fetch Data
     useEffect(() => {
         const loadData = async () => {
-            if (activePeriod?.id) {
+            if (activePeriod?.id && userInfo?.id) {
                 const ratings = await db.daily_ratings
-                    .where('periodId')
-                    .equals(activePeriod.id)
+                    .where({ periodId: activePeriod.id, userId: userInfo.id })
                     .toArray();
                 setDailyRatings(ratings);
             }
             setLoading(false);
         };
         loadData();
-    }, [activePeriod]);
+    }, [activePeriod, userInfo]);
 
     // 2. Process Data
     const { dateRange, processedHabits, dailyOverall } = useMemo(() => {
@@ -112,8 +111,6 @@ export default function ProgressLab() {
     if (!activePeriod) {
         return (
             <div className="progressLab">
-                <Header />
-                <Sidebar />
                 <div className="empty-state">
                     <h2>No Active Period</h2>
                     <p>Start a new period in the Lab to track progress.</p>
@@ -124,8 +121,6 @@ export default function ProgressLab() {
 
     return (
         <div className="progressLab">
-            <Header />
-            <Sidebar />
 
             <div className="progress-container">
                 <div className="header-text">

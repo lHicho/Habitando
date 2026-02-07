@@ -53,9 +53,9 @@ body {
   /* Added Inter for better body text */
   background-color: var(--bg-main);
   color: var(--text-main);
-  max-height: 100vh;
-  max-width: 100vw;
-  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 

@@ -6,7 +6,7 @@ import { db } from "../../../context/db"
 
 export default function DailyMain() {
 
-    const { selectedHabit, activePeriod } = useUser()
+    const { selectedHabit, activePeriod, userInfo } = useUser()
     const [missionRatings, setMissionRatings] = useState({})
 
     useEffect(() => {
@@ -17,8 +17,10 @@ export default function DailyMain() {
 
         const loadRatings = async () => {
             const today = new Date().toISOString().slice(0, 10);
-            // Assuming query by combo
-            const allRatings = await db.daily_ratings.toArray();
+            if (!userInfo?.id) return;
+
+            // Query only for current user
+            const allRatings = await db.daily_ratings.where({ userId: userInfo.id }).toArray();
             const existing = allRatings.find(r =>
                 r.periodId === activePeriod.id &&
                 r.habitId === selectedHabit.id &&
@@ -76,7 +78,7 @@ export default function DailyMain() {
     };
 
     const performSave = async (habit, period, ratings, showAlert = false) => {
-        if (!habit || !period) return;
+        if (!habit || !period || !userInfo?.id) return;
 
         let totalWeightedScore = 0;
         let totalImportance = 0;
@@ -91,7 +93,7 @@ export default function DailyMain() {
         const finalMark = totalImportance > 0 ? (totalWeightedScore / totalImportance).toFixed(1) : 0;
         const today = new Date().toISOString().slice(0, 10);
 
-        const allRatings = await db.daily_ratings.toArray();
+        const allRatings = await db.daily_ratings.where({ userId: userInfo.id }).toArray();
         const existing = allRatings.find(r =>
             r.periodId === period.id &&
             r.habitId === habit.id &&
@@ -102,6 +104,7 @@ export default function DailyMain() {
             await db.daily_ratings.update(existing.id, { mark: finalMark, details: ratings });
         } else {
             await db.daily_ratings.add({
+                userId: userInfo.id,
                 periodId: period.id,
                 habitId: habit.id,
                 date: today,

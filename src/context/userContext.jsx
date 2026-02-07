@@ -13,19 +13,26 @@ export const UserProvider = ({ children }) => {
     const [selectedHabit, setSelectedHabit] = useState("")
     const [activePeriod, setActivePeriod] = useState(null)
 
-    // Check and initialize period on mount
+    // Check and initialize period on mount, ONLY if user is logged in
     React.useEffect(() => {
-        checkPeriodStatus();
-    }, []);
+        if (userInfo?.id) {
+            checkPeriodStatus();
+        } else {
+            setActivePeriod(null);
+        }
+    }, [userInfo]);
 
     const checkPeriodStatus = async () => {
-        // Find existing active period
-        const currentPeriod = await db.periods.where('status').equals('active').first();
+        if (!userInfo?.id) return;
+
+        // Find existing active period for THIS user
+        const currentPeriod = await db.periods.where({ status: 'active', userId: userInfo.id }).first();
         const now = new Date();
 
         if (!currentPeriod) {
             // No period exists, create one
             const newPeriod = {
+                userId: userInfo.id,
                 status: 'active',
                 startDate: now.toISOString(),
                 endDate: new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000).toISOString() // 15 days
@@ -44,8 +51,10 @@ export const UserProvider = ({ children }) => {
     };
 
     const archivePeriod = async (period, createNew = true) => {
+        if (!userInfo?.id) return;
+
         // Move all logs for this period to archived_ratings
-        const logs = await db.daily_ratings.where('periodId').equals(period.id).toArray();
+        const logs = await db.daily_ratings.where({ periodId: period.id, userId: userInfo.id }).toArray();
 
         // Group by habitId for cleaner archiving (optional, but good for structured data)
         const habits = [...new Set(logs.map(log => log.habitId))];
@@ -53,6 +62,7 @@ export const UserProvider = ({ children }) => {
         for (const habitId of habits) {
             const habitLogs = logs.filter(l => l.habitId === habitId);
             await db.archived_ratings.add({
+                userId: userInfo.id,
                 habitId,
                 periodId: period.id,
                 data: habitLogs
@@ -66,6 +76,7 @@ export const UserProvider = ({ children }) => {
             // Start new period
             const now = new Date();
             const newPeriod = {
+                userId: userInfo.id,
                 status: 'active',
                 startDate: now.toISOString(),
                 endDate: new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000).toISOString()
@@ -76,10 +87,6 @@ export const UserProvider = ({ children }) => {
             setActivePeriod(null);
         }
     };
-
-    // const [edit, setEdit] = useState(false)
-
-    // const [habit, setHabit] = useState(null)
 
     const addUser = async (formData) => {
         const existingUser = await db.users.where('email').equals(formData.email).first();
@@ -115,13 +122,26 @@ export const UserProvider = ({ children }) => {
         setUserInfo(user)
     }
 
+    const signOut = () => {
+        setUserInfo('')
+        setActivePeriod(null)
+        setSelectedHabit('')
+        // Clear remember me localStorage
+        localStorage.removeItem('habitando-email')
+        localStorage.removeItem('habitando-password')
+    }
+
     const addHabit = async (habitData) => {
-        const existingHabit = await db.habits.where('name').equals(habitData.name).first();
-        const dataToSend = { ...habitData }
-        delete dataToSend.id
+        if (!userInfo?.id) return 100;
+
+        // Check duplication ONLY for this user
+        const existingHabit = await db.habits.where({ name: habitData.name, userId: userInfo.id }).first();
+
         if (existingHabit) {
             return 100
         } else {
+            const dataToSend = { ...habitData, userId: userInfo.id }
+            delete dataToSend.id
             await db.habits.add(dataToSend)
             return 200
         }
@@ -149,19 +169,23 @@ export const UserProvider = ({ children }) => {
         const habit = await db.habits.where("id").equals(id).first()
         setSelectedHabit(habit)
     }
+
     const getHabits = async () => {
-        return await db.habits.toArray();
+        if (!userInfo?.id) return [];
+        return await db.habits.where({ userId: userInfo.id }).toArray();
     }
 
     const startPeriod = async (periodData) => {
-        // Archive current active period if exists (though checkPeriodStatus handles this on mount, 
-        // explicit start might force a reset or ensure cleanliness)
-        const currentPeriod = await db.periods.where('status').equals('active').first();
+        if (!userInfo?.id) return 500; // Error if no user
+
+        // Archive current active period if exists
+        const currentPeriod = await db.periods.where({ status: 'active', userId: userInfo.id }).first();
         if (currentPeriod) {
             await archivePeriod(currentPeriod, false);
         }
 
         const newPeriod = {
+            userId: userInfo.id,
             status: 'active',
             startDate: periodData.startDate,
             endDate: periodData.endDate,
@@ -175,7 +199,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ userInfo, updateInfo, addUser, deleteUser, signIn, addHabit, editHabit, getInfo, selectedHabit, activePeriod, getHabits, startPeriod }}>
+        <UserContext.Provider value={{ userInfo, updateInfo, addUser, deleteUser, signIn, signOut, addHabit, editHabit, getInfo, selectedHabit, activePeriod, getHabits, startPeriod }}>
             {children}
         </UserContext.Provider>
     )

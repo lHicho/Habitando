@@ -1,13 +1,13 @@
 .progressLab {
-    min-height: 100vh;
+    min-height: 100%;
     background-color: var(--bg-main);
     display: flex;
     flex-direction: column;
     align-items: center;
     /* Center content */
-    padding-left: 250px;
-    /* Sidebar offset */
+    padding: 20px;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .progress-container {

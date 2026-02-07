@@ -24,7 +24,7 @@ const Layout = () => {
         <div className="app-layout">
             <Header />
             <Sidebar />
-            <main style={{ marginTop: '9vh', height: '91vh', overflowY: 'auto' , position: 'relative'}}>
+            <main style={{ marginTop: '9vh', height: '91vh', overflowY: 'hidden', overflowX: 'hidden', position: 'relative' }}>
                 <Outlet />
             </main>
         </div>

@@ -2,11 +2,19 @@ import "./userInfo.css"
 import DataDisplayer from "../dataDisplayer/dataDisplayer"
 import { useUser } from '../../context/userContext'
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { FiLogOut } from "react-icons/fi"
 
 export default function UserInfo() {
 
-    const { userInfo } = useUser()
+    const { userInfo, signOut } = useUser()
     const [changes, setChanges] = useState(false)
+    const navigate = useNavigate()
+
+    const handleSignOut = () => {
+        signOut()
+        navigate('/signin')
+    }
 
     return (
         <div className="userInfo">
@@ -26,9 +34,12 @@ export default function UserInfo() {
                         <button>Cancel</button>
                         <button>Save</button>
                     </> :
-                    <button onClick={setChanges(true)}>Enabl Changes</button>
+                    <button onClick={() => setChanges(true)}>Enable Changes</button>
                 }
             </div>
+            <button className="sign-out-btn" onClick={handleSignOut}>
+                <FiLogOut /> Sign Out
+            </button>
         </div>
     )
 }

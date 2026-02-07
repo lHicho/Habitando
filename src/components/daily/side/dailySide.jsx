@@ -3,16 +3,20 @@ import SideTask from "./sideTask.jsx"
 
 import { useLiveQuery } from "dexie-react-hooks"
 import { db } from "../../../context/db"
+import { useUser } from "../../../context/userContext"
 
 export default function DailySide() {
+    const { userInfo } = useUser()
+
     const data = useLiveQuery(async () => {
-        const activePeriod = await db.periods.where('status').equals('active').first();
+        if (!userInfo?.id) return { habits: [] };
+
+        const activePeriod = await db.periods.where({ status: 'active', userId: userInfo.id }).first();
         if (!activePeriod) return { habits: [] };
 
         const today = new Date().toISOString().slice(0, 10);
-        // We use compound index [periodId+date] if available, otherwise filter in memory
-        // Assuming simple query for now
-        const allRatings = await db.daily_ratings.toArray();
+        // Query only for current user
+        const allRatings = await db.daily_ratings.where({ userId: userInfo.id }).toArray();
         const ratings = allRatings.filter(r => r.periodId === activePeriod.id && r.date === today);
 
         const ratingsMap = {};
@@ -24,7 +28,7 @@ export default function DailySide() {
             habits: activePeriod.habits || [],
             ratings: ratingsMap
         };
-    });
+    }, [userInfo?.id]);
 
     if (!data) return <div className="dailySide">Loading...</div>;
 

@@ -11,8 +11,12 @@ import { FiPlusCircle } from "react-icons/fi"
 import { useUser } from "../../context/userContext"
 
 export default function Habits() {
+    const { userInfo } = useUser()
     const { openHabitTaker } = useSidebar()
-    const habits = useLiveQuery(() => db.habits.toArray())
+    const habits = useLiveQuery(
+        () => userInfo?.id ? db.habits.where({ userId: userInfo.id }).toArray() : [],
+        [userInfo?.id]
+    )
     const { edit, setEdit } = useSidebar()
 
     if (!habits) return <div>Loading...</div>
