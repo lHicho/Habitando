@@ -100,21 +100,23 @@ export default function DailyMain() {
             r.date === today
         );
 
-        if (existing) {
-            await db.daily_ratings.update(existing.id, { mark: finalMark, details: ratings });
-        } else {
-            await db.daily_ratings.add({
-                userId: userInfo.id,
-                periodId: period.id,
-                habitId: habit.id,
-                date: today,
-                mark: finalMark,
-                details: ratings
-            });
-        }
-
-        if (showAlert) {
-            alert("Daily progress saved!");
+        try {
+            if (existing) {
+                await db.daily_ratings.update(existing.id, { mark: finalMark, details: ratings });
+            } else {
+                await db.daily_ratings.add({
+                    userId: userInfo.id,
+                    periodId: period.id,
+                    habitId: habit.id,
+                    date: today,
+                    mark: finalMark,
+                    details: ratings
+                });
+            }
+            if (showAlert) alert("Daily progress saved!");
+        } catch (err) {
+            console.error("performSave error:", err);
+            if (showAlert) alert("Failed to save. Please try again.");
         }
     };
 

@@ -48,11 +48,16 @@ export default function HabitTaker({ edit }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const responce = await (edit ? editHabit(habitData) : addHabit(habitData));
-    if (responce == 100) {
-      toast.error("Habit allready existing.");
-    } else if (responce == 200) {
-      toast.success("Habit added succesfully.");
+    const name = (habitData.name || "").trim();
+    if (!name) {
+      toast.error("Please enter a habit name.");
+      return;
+    }
+    const response = await (edit ? editHabit(habitData) : addHabit({ ...habitData, name }));
+    if (response === 100) {
+      toast.error("Habit already existing.");
+    } else if (response === 200) {
+      toast.success("Habit added successfully.");
       setHabitData({
         name: "",
         importance: "",
@@ -60,8 +65,12 @@ export default function HabitTaker({ edit }) {
         icon: "",
         sideMissions: [],
       });
-    } else if (responce == 300) {
-      toast.success("Habit edited succesfully.");
+    } else if (response === 300) {
+      toast.success("Habit edited successfully.");
+    } else if (response === 400) {
+      toast.error("Invalid habit data.");
+    } else if (response === 500) {
+      toast.error("Something went wrong. Please try again.");
     }
   };
 

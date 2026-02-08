@@ -89,12 +89,16 @@ export const UserProvider = ({ children }) => {
     };
 
     const addUser = async (formData) => {
-        const existingUser = await db.users.where('email').equals(formData.email).first();
-        if (existingUser) {
-            return 100
-        } else {
-            await db.users.add(formData)
-            return 200
+        const email = formData?.email?.trim();
+        if (!email || !formData?.password) return 500;
+        try {
+            const existingUser = await db.users.where("email").equals(email).first();
+            if (existingUser) return 100;
+            await db.users.add({ ...formData, email });
+            return 200;
+        } catch (err) {
+            console.error("addUser error:", err);
+            return 500;
         }
     }
 
@@ -103,17 +107,18 @@ export const UserProvider = ({ children }) => {
     }
 
     const signIn = async (mail, pass) => {
-        const user = await db.users.where('email').equals(mail).first()
-
-        if (!user) {
-            setUserInfo('')
-            return 100
-        } else {
-            if (user.password == pass) {
-                return 200
-            } else {
-                return 300
+        if (!mail?.trim() || pass == null) return 500;
+        try {
+            const user = await db.users.where("email").equals(mail.trim()).first();
+            if (!user) {
+                setUserInfo("");
+                return 100;
             }
+            if (user.password === pass) return 200;
+            return 300;
+        } catch (err) {
+            console.error("signIn error:", err);
+            return 500;
         }
     }
 
@@ -132,18 +137,22 @@ export const UserProvider = ({ children }) => {
     }
 
     const addHabit = async (habitData) => {
-        if (!userInfo?.id) return 100;
+        if (!userInfo?.id) return 500;
 
-        // Check duplication ONLY for this user
-        const existingHabit = await db.habits.where({ name: habitData.name, userId: userInfo.id }).first();
+        const name = (habitData?.name || "").trim();
+        if (!name) return 400;
 
-        if (existingHabit) {
-            return 100
-        } else {
-            const dataToSend = { ...habitData, userId: userInfo.id }
-            delete dataToSend.id
-            await db.habits.add(dataToSend)
-            return 200
+        try {
+            const existingHabit = await db.habits.where({ name, userId: userInfo.id }).first();
+            if (existingHabit) return 100;
+
+            const dataToSend = { ...habitData, name, userId: userInfo.id };
+            delete dataToSend.id;
+            await db.habits.add(dataToSend);
+            return 200;
+        } catch (err) {
+            console.error("addHabit error:", err);
+            return 500;
         }
     }
 
@@ -156,12 +165,20 @@ export const UserProvider = ({ children }) => {
     }
 
     const editHabit = async (habitData) => {
-        const existingHabit = await db.habits.where('id').equals(habitData.id).first();
-        if (existingHabit) {
-            await db.habits.update(habitData.id, habitData)
-            return 300
-        } else {
-            return 100
+        if (!habitData?.id) return 500;
+
+        const name = (habitData?.name || "").trim();
+        if (!name) return 400;
+
+        try {
+            const existingHabit = await db.habits.where("id").equals(habitData.id).first();
+            if (!existingHabit) return 100;
+
+            await db.habits.update(habitData.id, { ...habitData, name });
+            return 300;
+        } catch (err) {
+            console.error("editHabit error:", err);
+            return 500;
         }
     }
 

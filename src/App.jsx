@@ -1,23 +1,25 @@
 import "./App.css"
+import { lazy, Suspense } from "react"
 import { SidebarProvider } from "./context/sideContext.jsx"
 import { UserProvider } from "./context/userContext.jsx"
 
-import Home from "./components/home/home.jsx"
-import SignIn from "./components/signIn/signIn.jsx"
-import CreatAccount from "./components/creatAccount/creatAccount.jsx"
-import Daily from "./pages/daily.jsx"
-import UserInfo from "./components/userInfo/userInfo.jsx"
 import Header from "./components/header/header"
 import Sidebar from "./components/sidebar/sidebar"
-import Habits from "./components/habits/habits.jsx"
-import PeriodeLab from "./pages/periodeLab/periodeLab.jsx"
-import ProgressLab from "./pages/progressLab/progressLab.jsx"
 import ProtectedRoute from "./components/ProtectedRoute.jsx"
 
 import { Toaster } from "react-hot-toast"
 
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import { ThemeProvider } from "./context/themeContext.jsx"
+
+const Home = lazy(() => import("./components/home/home.jsx"))
+const SignIn = lazy(() => import("./components/signIn/signIn.jsx"))
+const CreatAccount = lazy(() => import("./components/creatAccount/creatAccount.jsx"))
+const Daily = lazy(() => import("./pages/daily.jsx"))
+const UserInfo = lazy(() => import("./components/userInfo/userInfo.jsx"))
+const Habits = lazy(() => import("./components/habits/habits.jsx"))
+const PeriodeLab = lazy(() => import("./pages/periodeLab/periodeLab.jsx"))
+const ProgressLab = lazy(() => import("./pages/progressLab/progressLab.jsx"))
 
 const Layout = () => {
     return (
@@ -31,6 +33,8 @@ const Layout = () => {
     )
 }
 
+const PageFallback = () => <div className="page-loading">Loading...</div>
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -39,37 +43,37 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <ProtectedRoute><Home /></ProtectedRoute>
+                element: <ProtectedRoute><Suspense fallback={<PageFallback />}><Home /></Suspense></ProtectedRoute>
             },
             {
                 path: "/daily",
-                element: <ProtectedRoute requiresPeriod={true}><Daily /></ProtectedRoute>
+                element: <ProtectedRoute requiresPeriod={true}><Suspense fallback={<PageFallback />}><Daily /></Suspense></ProtectedRoute>
             },
             {
                 path: "/profile",
-                element: <ProtectedRoute><UserInfo /></ProtectedRoute>
+                element: <ProtectedRoute><Suspense fallback={<PageFallback />}><UserInfo /></Suspense></ProtectedRoute>
             },
             {
                 path: "/habitsLab",
-                element: <ProtectedRoute><Habits /></ProtectedRoute>
+                element: <ProtectedRoute><Suspense fallback={<PageFallback />}><Habits /></Suspense></ProtectedRoute>
             },
             {
                 path: "/periodeLab",
-                element: <ProtectedRoute><PeriodeLab /></ProtectedRoute>
+                element: <ProtectedRoute><Suspense fallback={<PageFallback />}><PeriodeLab /></Suspense></ProtectedRoute>
             },
             {
                 path: "/progressLab",
-                element: <ProtectedRoute requiresPeriod={true}><ProgressLab /></ProtectedRoute>
+                element: <ProtectedRoute requiresPeriod={true}><Suspense fallback={<PageFallback />}><ProgressLab /></Suspense></ProtectedRoute>
             }
         ]
     },
     {
         path: "/signin",
-        element: <SignIn />
+        element: <Suspense fallback={<PageFallback />}><SignIn /></Suspense>
     },
     {
         path: "/regester",
-        element: <CreatAccount />
+        element: <Suspense fallback={<PageFallback />}><CreatAccount /></Suspense>
     }
 ])
 

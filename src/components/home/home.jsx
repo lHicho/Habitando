@@ -7,9 +7,10 @@ import Sidebar from "../sidebar/sidebar.jsx"
 import { useSidebar } from "../../context/sideContext.jsx"
 import { useUser } from "../../context/userContext.jsx"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { db } from "../../context/db.js"
-import { parseISO, isAfter, differenceInDays } from "date-fns"
+import { parseISO, differenceInDays } from "date-fns"
+import { useLiveQuery } from "dexie-react-hooks"
 
 export default function Home() {
     const { userInfo, activePeriod } = useUser()
@@ -45,6 +46,32 @@ export default function Home() {
         checkPeriodStatus();
     }, [userInfo, activePeriod]);
 
+    const todayStr = new Date().toISOString().slice(0, 10);
+    const todayRatings = useLiveQuery(
+        () =>
+            userInfo?.id && activePeriod?.id
+                ? db.daily_ratings
+                      .where({ userId: userInfo.id, periodId: activePeriod.id, date: todayStr })
+                      .toArray()
+                : [],
+        [userInfo?.id, activePeriod?.id, todayStr]
+    );
+
+    const todaysRanking = useMemo(() => {
+        if (!todayRatings || !activePeriod?.habits || todayRatings.length === 0) return 0;
+        const habits = activePeriod.habits || [];
+        let sum = 0;
+        let totalImportance = 0;
+        todayRatings.forEach((r) => {
+            const habitInfo = habits.find((h) => (h.habitId || h.id) === r.habitId);
+            const importance = habitInfo ? (parseInt(habitInfo.importance || habitInfo.importace) || 1) : 1;
+            sum += parseFloat(r.mark || 0) * importance;
+            totalImportance += importance;
+        });
+        if (totalImportance <= 0) return 0;
+        return (sum / totalImportance).toFixed(1);
+    }, [todayRatings, activePeriod?.habits]);
+
     return (
         <>
             <Header />
@@ -66,7 +93,7 @@ export default function Home() {
                 )}
 
                 <div className="infoContainer">
-                    <Info tools={false} title="Habits" description="Tasks finished:" info="70%" to="/daily" />
+                    <Info tools={false} title="Habits" description="Today's ranking:" info={String(todaysRanking)} to="/daily" />
                     <Info tools={false} title="Finance" description="Money left:" info="200" />
                 </div>
             </div>
