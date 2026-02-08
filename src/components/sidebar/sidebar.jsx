@@ -11,13 +11,8 @@ export default function Sidebar() {
     const { userInfo } = useUser()
     const navigate = useNavigate()
 
-    const sendToInfo = () => {
-        navigate('/profile')
-        closeSidebar()
-    }
-
-    const sendToHome = () => {
-        navigate('/')
+    const goto = (path) => {
+        navigate(path)
         closeSidebar()
     }
 
@@ -28,18 +23,23 @@ export default function Sidebar() {
                     <button onClick={closeSidebar}>
                         <MdOutlineCancel />
                     </button>
-                    <img src="src/assets/icon.png" alt="logo" onClick={sendToHome} />
+                    <img src="src/assets/icon.png" alt="logo" onClick={() => goto("/")} />
                 </div>
 
                 {(!userInfo) ? null :
-                    <div className="acount" onClick={sendToInfo}>
+                    <div className="acount" onClick={() => goto("/profile")}>
                         <img src="/userIcon.png" alt="User Icon" />
                         <h1>{userInfo.username}</h1>
                     </div>
                 }
-
-                <Link to="/habits">Habits</Link>
-
+                <ul className="linksList">
+                    <p onClick={() => goto("/")}>Home</p>
+                    <p onClick={() => goto("/habitsLab")}>Habits Lab</p>
+                    <p onClick={() => goto("/periodeLab")}>Periode Lab</p>
+                    <p onClick={() => goto("/progressLab")}>Progress Lab</p>
+                    <p onClick={() => goto("/profile")}>Profile</p>
+                    <p onClick={() => goto("/daily")}>Daily</p>
+                </ul>
             </div>
             <div onClick={closeSidebar} id="overflowDiv" className={(isOpen) ? "overflowDiv overflowOn" : "overflowDiv overflowOff"}>
             </div>

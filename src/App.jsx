@@ -6,13 +6,13 @@ import Home from "./components/home/home.jsx"
 import SignIn from "./components/signIn/signIn.jsx"
 import CreatAccount from "./components/creatAccount/creatAccount.jsx"
 import Daily from "./pages/daily.jsx"
-import Resume from "./pages/resume.jsx"
 import UserInfo from "./components/userInfo/userInfo.jsx"
 import Header from "./components/header/header"
 import Sidebar from "./components/sidebar/sidebar"
 import Habits from "./components/habits/habits.jsx"
 import PeriodeLab from "./pages/periodeLab/periodeLab.jsx"
 import ProgressLab from "./pages/progressLab/progressLab.jsx"
+import ProtectedRoute from "./components/ProtectedRoute.jsx"
 
 import { Toaster } from "react-hot-toast"
 
@@ -39,31 +39,27 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />
+                element: <ProtectedRoute><Home /></ProtectedRoute>
             },
             {
                 path: "/daily",
-                element: <Daily />
-            },
-            {
-                path: "/resume",
-                element: <Resume />
+                element: <ProtectedRoute requiresPeriod={true}><Daily /></ProtectedRoute>
             },
             {
                 path: "/profile",
-                element: <UserInfo />
+                element: <ProtectedRoute><UserInfo /></ProtectedRoute>
             },
             {
-                path: "/habits",
-                element: <Habits />
+                path: "/habitsLab",
+                element: <ProtectedRoute><Habits /></ProtectedRoute>
             },
             {
                 path: "/periodeLab",
-                element: <PeriodeLab />
+                element: <ProtectedRoute><PeriodeLab /></ProtectedRoute>
             },
             {
                 path: "/progressLab",
-                element: <ProgressLab />
+                element: <ProtectedRoute requiresPeriod={true}><ProgressLab /></ProtectedRoute>
             }
         ]
     },

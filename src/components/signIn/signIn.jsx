@@ -37,7 +37,7 @@ export default function SignIn() {
             const performAutoLogin = async () => {
                 const respnce = await signIn(savedEmail, savedPassword)
                 if (respnce == 200) {
-                    updateInfo(savedEmail)
+                    await updateInfo(savedEmail)
                     toast.success("Welcome back!")
                     stayFunc()
                     navigate('/')
@@ -67,7 +67,7 @@ export default function SignIn() {
                 if (respnce == 100) {
                     toast.error("User e-mail not found.")
                 } else if (respnce == 200) {
-                    updateInfo(signData.email)
+                    await updateInfo(signData.email)
                     toast.success("Signed in succesfully")
 
                     if (signData.rememberMe) {

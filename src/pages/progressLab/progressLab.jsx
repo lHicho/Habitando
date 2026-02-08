@@ -1,12 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
 import { format, eachDayOfInterval, parseISO, isSameDay } from "date-fns";
 import { useUser } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../context/db";
 import IconGenerator from "../../components/iconGenerator";
 import "./progressLab.css";
 
 export default function ProgressLab() {
     const { activePeriod, userInfo } = useUser();
+    const navigate = useNavigate();
     const [dailyRatings, setDailyRatings] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -112,8 +114,14 @@ export default function ProgressLab() {
         return (
             <div className="progressLab">
                 <div className="empty-state">
-                    <h2>No Active Period</h2>
-                    <p>Start a new period in the Lab to track progress.</p>
+                    <h2>📊 No Active Period</h2>
+                    <p>You need to create a period first to track your progress.</p>
+                    <button
+                        className="create-period-btn"
+                        onClick={() => navigate('/periodeLab')}
+                    >
+                        Go to Period Lab
+                    </button>
                 </div>
             </div>
         );

@@ -171,7 +171,15 @@ export default function PeriodeLab() {
                     {/* Section 2: Habits */}
 
                     <div className="habit-selection-group">
-                        <div className="sectionTitle">Habits</div>
+                        <div className="sectionTitle">
+                            <span>Habits</span>
+                            <button
+                                className="manage-habits-btn"
+                                onClick={() => navigate('/habitsLab')}
+                            >
+                                ⚙️ Manage Habits
+                            </button>
+                        </div>
                         <div className="habitsList">
                             {availableHabits
                                 .map(habit => {
