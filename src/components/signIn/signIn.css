@@ -54,7 +54,7 @@
     border: 2px solid var(--border-color);
     background-color: var(--bg-main);
     color: var(--text-main);
-    font-family: 'Inter', 'Lalezar', sans-serif;
+    font-family: var(--font-main);
     outline: none;
     transition: border-color 0.2s;
 }
@@ -76,7 +76,7 @@
     width: 100%;
     padding: 12px;
     font-size: 1.1rem;
-    font-family: 'Inter', 'Lalezar', sans-serif;
+    font-family: var(--font-main);
     cursor: pointer;
     font-weight: 600;
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);

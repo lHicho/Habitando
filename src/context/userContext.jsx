@@ -192,6 +192,18 @@ export const UserProvider = ({ children }) => {
         return await db.habits.where({ userId: userInfo.id }).toArray();
     }
 
+    const updateAvatar = async (avatarDataUrl) => {
+        if (!userInfo?.id) return 500;
+        try {
+            await db.users.update(userInfo.id, { avatar: avatarDataUrl });
+            setUserInfo(prev => ({ ...prev, avatar: avatarDataUrl }));
+            return 200;
+        } catch (err) {
+            console.error("updateAvatar error:", err);
+            return 500;
+        }
+    }
+
     const startPeriod = async (periodData) => {
         if (!userInfo?.id) return 500; // Error if no user
 
@@ -216,7 +228,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ userInfo, updateInfo, addUser, deleteUser, signIn, signOut, addHabit, editHabit, getInfo, selectedHabit, activePeriod, getHabits, startPeriod }}>
+        <UserContext.Provider value={{ userInfo, updateInfo, addUser, deleteUser, signIn, signOut, addHabit, editHabit, getInfo, selectedHabit, activePeriod, getHabits, startPeriod, updateAvatar }}>
             {children}
         </UserContext.Provider>
     )

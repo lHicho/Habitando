@@ -72,6 +72,13 @@ export default function Home() {
         return (sum / totalImportance).toFixed(1);
     }, [todayRatings, activePeriod?.habits]);
 
+    const financeSettings = useLiveQuery(
+        () =>
+            userInfo?.id ? db.finance_settings.where("userId").equals(userInfo.id).first() : null,
+        [userInfo?.id]
+    );
+    const financeSurplus = financeSettings?.surplusBalance ?? 0;
+
     return (
         <>
             <Header />
@@ -94,7 +101,7 @@ export default function Home() {
 
                 <div className="infoContainer">
                     <Info tools={false} title="Habits" description="Today's ranking:" info={String(todaysRanking)} to="/daily" />
-                    <Info tools={false} title="Finance" description="Money left:" info="200" />
+                    <Info tools={false} title="Finance" description="Surplus:" info={`${Number(financeSurplus).toFixed(2)} MAD`} to="/finance" />
                 </div>
             </div>
         </>

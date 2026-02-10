@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -24,6 +26,8 @@
 
   --glass-bg: rgba(255, 255, 255, 0.6);
   --glass-border: rgba(255, 255, 255, 0.3);
+
+  --font-main: "Cairo", "lalezar", sans-serif;
 }
 
 [data-theme="dark"] {
@@ -49,7 +53,7 @@
 }
 
 body {
-  font-family: 'Inter', 'Lalezar', sans-serif;
+  font-family: var(--font-main);
   /* Added Inter for better body text */
   background-color: var(--bg-main);
   color: var(--text-main);

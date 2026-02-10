@@ -35,7 +35,7 @@ export default function Header() {
             </div>
             <div className="nav">
                 <div className="time">
-                    {userInfo && <img src="/userIcon.png" alt="icon" />}
+                    {userInfo && <img src={userInfo.avatar || "/userIcon.png"} alt="icon" />}
                     <p>{clock}</p>
                 </div>
 

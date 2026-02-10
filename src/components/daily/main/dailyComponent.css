@@ -27,7 +27,7 @@
 .compo input {
     width: 30%;
     font-size: 1.2rem;
-    font-family: 'Inter', 'Lalezar', sans-serif;
+    font-family: var(--font-main);
     border: none;
     outline: none;
     text-align: center;

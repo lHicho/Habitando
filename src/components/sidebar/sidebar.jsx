@@ -28,7 +28,7 @@ export default function Sidebar() {
 
                 {(!userInfo) ? null :
                     <div className="acount" onClick={() => goto("/profile")}>
-                        <img src="/userIcon.png" alt="User Icon" />
+                        <img src={userInfo.avatar || "/userIcon.png"} alt="User Icon" />
                         <h1>{userInfo.username}</h1>
                     </div>
                 }

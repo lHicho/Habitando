@@ -95,7 +95,7 @@
   padding: 5px 15px;
   border: 2px solid #000000;
   border-radius: 100px;
-  font-family: Lalezar, Arial, sans-serif;
+  font-family: var(--font-main);
   font-size: min(16px, 5vw);
 }
 
@@ -119,7 +119,7 @@
   padding: 5px;
   border: 2px solid #000000;
   border-radius: 10px;
-  font-family: Lalezar, Arial, sans-serif;
+  font-family: var(--font-main);
   font-size: min(16px, 5vw);
 }
 
@@ -127,7 +127,7 @@
   padding: 5px 15px;
   border: 2px solid #000000;
   border-radius: 100px;
-  font-family: Lalezar, Arial, sans-serif;
+  font-family: var(--font-main);
   font-size: min(16px, 5vw);
   cursor: pointer;
 }
@@ -212,7 +212,7 @@
   border-radius: 50px;
   border: solid 2px #000000;
   outline: none;
-  font-family: Lalezar, sans-serif;
+  font-family: var(--font-main);
   font-size: min(12px, 3vw);
   cursor: pointer;
   transition: 0.3s;
@@ -279,7 +279,7 @@
   padding: 8px 20px;
   border: 2px solid #000000;
   border-radius: 100px;
-  font-family: Lalezar, Arial, sans-serif;
+  font-family: var(--font-main);
   font-size: min(16px, 5vw);
   background: white;
   cursor: pointer;
@@ -297,7 +297,7 @@
   padding: 5px 15px;
   border: 2px solid #000000;
   border-radius: 100px;
-  font-family: Lalezar, Arial, sans-serif;
+  font-family: var(--font-main);
   font-size: min(16px, 5vw);
 }
 

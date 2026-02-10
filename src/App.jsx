@@ -20,6 +20,7 @@ const UserInfo = lazy(() => import("./components/userInfo/userInfo.jsx"))
 const Habits = lazy(() => import("./components/habits/habits.jsx"))
 const PeriodeLab = lazy(() => import("./pages/periodeLab/periodeLab.jsx"))
 const ProgressLab = lazy(() => import("./pages/progressLab/progressLab.jsx"))
+const Finance = lazy(() => import("./pages/finance/finance.jsx"))
 
 const Layout = () => {
     return (
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path: "/progressLab",
                 element: <ProtectedRoute requiresPeriod={true}><Suspense fallback={<PageFallback />}><ProgressLab /></Suspense></ProtectedRoute>
+            },
+            {
+                path: "/finance",
+                element: <ProtectedRoute><Suspense fallback={<PageFallback />}><Finance /></Suspense></ProtectedRoute>
             }
         ]
     },

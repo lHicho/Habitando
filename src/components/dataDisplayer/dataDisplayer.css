@@ -1,17 +1,19 @@
-.dataDisplayer{
+.dataDisplayer {
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: center;
 }
-.dataDisplayer p{
+
+.dataDisplayer p {
     font-size: min(24px, 3vw);
     font-weight: 700;
 }
-.dataDisplayer input{
+
+.dataDisplayer input {
     padding: 5px 20px;
     border-radius: 30px;
     border: solid 2px #000000;
-    font-family: Lalezar, sans-serif;
+    font-family: var(--font-main);
     font-size: min(24px, 3vw);
 }
