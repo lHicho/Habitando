@@ -176,9 +176,7 @@ export default function PeriodeLab() {
                             <button
                                 className="manage-habits-btn"
                                 onClick={() => navigate('/habitsLab')}
-                            >
-                                ⚙️ Manage Habits
-                            </button>
+                            >Manage Habits</button>
                         </div>
                         <div className="habitsList">
                             {availableHabits

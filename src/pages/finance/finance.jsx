@@ -224,8 +224,6 @@ export default function Finance() {
                     <div className="finance-top-item finance-top-spending">
                         <span className="finance-top-label">Today ({format(new Date(), "MMM d")})</span>
                         <div className="today-controls">
-                        <button className="finance-adj-btn" onClick={() => adjustSpent(-10)} title="Subtract 10">−10</button>
-                        <button className="finance-adj-btn" onClick={() => adjustSpent(-1)} title="Subtract 1">−1</button>
                         <input
                             type="number"
                             min="0"
@@ -235,8 +233,6 @@ export default function Finance() {
                             onBlur={handleTodaySpentBlur}
                             className="finance-spent-input"
                         />
-                        <button className="finance-adj-btn" onClick={() => adjustSpent(1)} title="Add 1">+1</button>
-                        <button className="finance-adj-btn" onClick={() => adjustSpent(10)} title="Add 10">+10</button>
                         </div>
                     </div>
                 </div>

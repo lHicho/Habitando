@@ -38,6 +38,7 @@ export default function Sidebar() {
                     <p onClick={() => goto("/periodeLab")}>Periode Lab</p>
                     <p onClick={() => goto("/progressLab")}>Progress Lab</p>
                     <p onClick={() => goto("/profile")}>Profile</p>
+                    <p onClick={() => goto("/finance")}>Finance</p>
                     <p onClick={() => goto("/daily")}>Daily</p>
                 </ul>
             </div>
