@@ -51,8 +51,8 @@ export default function Home() {
         () =>
             userInfo?.id && activePeriod?.id
                 ? db.daily_ratings
-                      .where({ userId: userInfo.id, periodId: activePeriod.id, date: todayStr })
-                      .toArray()
+                    .where({ userId: userInfo.id, periodId: activePeriod.id, date: todayStr })
+                    .toArray()
                 : [],
         [userInfo?.id, activePeriod?.id, todayStr]
     );
@@ -73,11 +73,39 @@ export default function Home() {
     }, [todayRatings, activePeriod?.habits]);
 
     const financeSettings = useLiveQuery(
-        () =>
-            userInfo?.id ? db.finance_settings.where("userId").equals(userInfo.id).first() : null,
+        () => userInfo?.id ? db.finance_settings.where("userId").equals(userInfo.id).first() : null,
         [userInfo?.id]
     );
-    const financeSurplus = financeSettings?.surplusBalance ?? 0;
+
+    const allExpenses = useLiveQuery(
+        () => userInfo?.id ? db.expenses.where("userId").equals(userInfo.id).toArray() : [],
+        [userInfo?.id]
+    );
+
+    const financialInfo = useMemo(() => {
+        if (!financeSettings || !allExpenses) return { left: 0, daily: 0 };
+
+        const today = new Date();
+        const monthStart = new Date(today.getFullYear(), today.getMonth(), 1).toISOString().slice(0, 10);
+
+        const monthlyBudgetValue = financeSettings.monthlyBudget || 0;
+        const spentThisMonth = allExpenses
+            .filter(e => e.date >= monthStart)
+            .reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
+
+        const left = monthlyBudgetValue - spentThisMonth;
+
+        const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        const daysLeft = Math.max(1, differenceInDays(lastDayOfMonth, today) + 1);
+        const daily = left > 0 ? (left / daysLeft).toFixed(1) : 0;
+
+        const budgetPercentage = monthlyBudgetValue > 0 ? (left / monthlyBudgetValue) * 100 : 100;
+        let status = "normal";
+        if (left <= 0) status = "danger";
+        else if (budgetPercentage <= 20) status = "warning";
+
+        return { left, daily, status };
+    }, [financeSettings, allExpenses]);
 
     return (
         <>
@@ -101,7 +129,14 @@ export default function Home() {
 
                 <div className="infoContainer">
                     <Info tools={false} title="Habits" description="Today's ranking:" info={String(todaysRanking)} to="/daily" />
-                    <Info tools={false} title="Finance" description="Surplus:" info={`${Number(financeSurplus).toFixed(2)} MAD`} to="/finance" />
+                    <Info
+                        tools={false}
+                        title="Finance"
+                        description={`Monthly Left: ${financialInfo.left.toLocaleString()} MAD`}
+                        info={`${financialInfo.daily} MAD Daily`}
+                        to="/finance"
+                        className={financialInfo.status}
+                    />
                 </div>
             </div>
         </>

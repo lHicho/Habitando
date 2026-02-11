@@ -4,64 +4,105 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+    max-width: 550px;
     width: 90%;
-    animation: slideIn 0.3s ease-out;
+    border: 1px solid var(--glass-border);
+    animation: homeSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .notification-content {
     text-align: center;
-    color: white;
+    color: var(--text-main);
 }
 
 .notification-content h2 {
-    font-size: 1.8rem;
+    font-size: 2.25rem;
     margin-bottom: 1rem;
-    font-weight: 700;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.04em;
 }
 
 .notification-content p {
     font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.95;
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
     line-height: 1.6;
+    font-weight: 500;
 }
 
 .create-period-btn {
-    background: white;
-    color: #667eea;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
     border: none;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
+    padding: 1.25rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: var(--radius-m);
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
 }
 
 .create-period-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    background: #f8f9fa;
+    filter: brightness(1.1);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
 }
 
-.create-period-btn:active {
-    transform: translateY(0);
-}
-
-@keyframes slideIn {
+@keyframes homeSlideIn {
     from {
         opacity: 0;
-        transform: translate(-50%, -60%);
+        transform: translate(-50%, -40%) scale(0.9);
     }
 
     to {
         opacity: 1;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Financial Status for Home Page cards */
+.infoDivCont.warning {
+    border-left: 4px solid var(--warning) !important;
+}
+
+.infoDivCont.warning h2 {
+    background: var(--warning) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+.infoDivCont.danger {
+    border-left: 4px solid var(--danger) !important;
+    animation: home-danger-pulse 2s infinite ease-in-out;
+}
+
+.infoDivCont.danger h2 {
+    background: var(--danger) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+@keyframes home-danger-pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

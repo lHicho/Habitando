@@ -3,61 +3,62 @@
     justify-content: space-between;
     width: 100%;
     background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-m);
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--card-shadow);
 }
 
 .compo:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    transform: translateX(4px);
+    border-color: var(--primary);
+    background: var(--glass-bg);
 }
 
 .compo .compoText {
-    width: 70%;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 15px;
-    border-right: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
     color: var(--text-main);
 }
 
 .compo input {
-    width: 30%;
-    font-size: 1.2rem;
-    font-family: var(--font-main);
+    width: 80px;
+    font-size: 1.5rem;
+    font-family: inherit;
     border: none;
     outline: none;
     text-align: center;
-    padding: 10px 0;
-    background: transparent;
+    padding: 1rem 0;
+    background: rgba(99, 102, 241, 0.05);
     color: var(--primary);
-    font-weight: 700;
+    font-weight: 800;
+    border-left: 1px solid var(--glass-border);
+    transition: all 0.2s;
 }
 
-/* Remove Arrows/Spinners from number input */
-.compo input::-webkit-outer-spin-button,
-.compo input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.compo input[type=number] {
-    -moz-appearance: textfield;
-    appearance: textfield;
+.compo input:focus {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--secondary);
 }
 
 .compo .compoText h1 {
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .compo .compoText p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 700;
     color: var(--text-secondary);
     background: var(--bg-main);
-    padding: 2px 8px;
-    border-radius: 6px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
 }

@@ -184,9 +184,11 @@ export default function HabitTaker({ edit }) {
                   name="description"
                   value={habitData.description}
                 />
-                <button type="submit">
-                  {edit ? "Edit Habit" : "Add Habit"}
-                </button>
+                <div className="buttonContainer">
+                  <button type="submit" className="submitBtn">
+                    {edit ? "Edit Habit" : "Add Habit"}
+                  </button>
+                </div>
               </form>
             </div>
 

@@ -7,7 +7,7 @@ import { useSidebar } from "../../context/sideContext"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
 
-export default function Info({ title, description, info, icon, to, id, tools }) {
+export default function Info({ title, description, info, icon, to, id, tools, className }) {
     // const { editTrue } = useUser()
     const { openHabitTaker, setEdit } = useSidebar()
     const navigate = useNavigate()
@@ -62,7 +62,7 @@ export default function Info({ title, description, info, icon, to, id, tools }) 
     }
 
     return (
-        <div className="infoDivCont" onClick={handleCardClick}>
+        <div className={`infoDivCont ${className || ""}`} onClick={handleCardClick}>
             <div className="infoDiv" >
                 {tools ? <div className="inofTools">
                     <button onClick={(e) => { e.stopPropagation(); editHabitFunc(id); }}><MdModeEdit /></button>

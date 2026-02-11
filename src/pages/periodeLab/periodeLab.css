@@ -3,149 +3,149 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding: 20px;
-    background-color: transparent;
+    padding: 1rem;
 }
 
 .periodeCard {
     background: var(--bg-card);
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px var(--shadow-color);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--card-shadow);
     width: 100%;
     max-width: 900px;
-    height: 80vh;
+    max-height: 95%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
 }
 
 .mainPeriode {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    min-height: 250px;
-    margin-bottom: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     width: 100%;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.mainPeriode::-webkit-scrollbar {
+    width: 4px;
+}
+
+.mainPeriode::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
 }
 
 .periodeTitle {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 0.2rem;
+    font-size: 2.5rem;
+    font-weight: 800;
     text-align: center;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.04em;
 }
 
 .periodeSubtitle {
     color: var(--text-secondary);
     text-align: center;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .sectionTitle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 800;
     color: var(--text-secondary);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 0.5rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .manage-habits-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
+    background: var(--bg-main);
+    color: var(--primary);
+    border: 1px solid var(--border-color);
     padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    transition: all 0.2s;
 }
 
 .manage-habits-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.manage-habits-btn:active {
-    transform: translateY(0);
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
 }
 
 /* Inputs */
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    height: 100%;
+    gap: 1.5rem;
 }
 
 .inputField {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 0.5rem;
 }
 
 .inputField label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    color: var(--text-main);
-    margin-left: 5px;
+    color: var(--text-secondary);
+    margin-left: 0.5rem;
 }
 
 .inputField input {
-    padding: 12px 16px;
-    border-radius: 12px;
-    border: 2px solid var(--border-color);
-    font-size: 1rem;
-    transition: all 0.2s ease;
-    outline: none;
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    width: 100%;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-main);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .inputField input:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    background-color: var(--bg-card);
+    background: var(--bg-card);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1);
+}
+
+.inputField input:hover {
+    border-color: var(--primary);
 }
 
 /* Habit List */
-.habit-selection-group {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    /* specific height for scroll */
-}
-
 .habitsList {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    max-height: 350px;
     overflow-y: auto;
-    overflow-x: hidden;
-    flex: 1;
-    margin: 5px 0 0 0;
+    padding-right: 8px;
 }
 
 .habitsList::-webkit-scrollbar {
-    background-color: transparent;
-    width: 5px;
+    width: 4px;
 }
 
 .habitsList::-webkit-scrollbar-thumb {
-    background-color: var(--text-secondary);
-    opacity: 0.5;
+    background: var(--border-color);
     border-radius: 10px;
 }
 
@@ -153,36 +153,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 1rem 1.25rem;
+    background: var(--bg-main);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    transition: all 0.2s;
+    border-radius: var(--radius-m);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    background-color: var(--bg-card);
 }
 
 .habitItem:hover {
-    background-color: var(--bg-main);
-    border-color: var(--text-secondary);
+    transform: translateX(4px);
+    border-color: var(--primary);
 }
 
 .habitItem.selected {
-    background-color: rgba(99, 102, 241, 0.1);
-    /* light primary tint */
+    background: rgba(99, 102, 241, 0.08);
     border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
 }
 
 .habitInfo {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex: 1;
 }
 
 .habitInfo span {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-main);
-    font-size: 0.95rem;
 }
 
 .habitItem.selected span {
@@ -192,134 +190,122 @@
 /* Actions */
 .actionButtons {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
+    margin-top: 2rem;
     justify-content: center;
 }
 
 .primaryBtn {
     flex: 1;
-    max-width: 200px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    max-width: 240px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     border: none;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-m);
+    font-weight: 800;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    transition: all 0.2s;
 }
 
 .primaryBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    filter: brightness(1.1);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
 }
 
 .secondaryBtn {
     flex: 1;
-    max-width: 150px;
-    background: var(--bg-card);
+    max-width: 180px;
+    background: var(--bg-main);
     color: var(--text-secondary);
-    border: 2px solid var(--border-color);
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    padding: 1.25rem;
+    border-radius: var(--radius-m);
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 
 .secondaryBtn:hover {
-    background: var(--bg-main);
-    border-color: var(--text-secondary);
+    background: var(--bg-card);
     color: var(--text-main);
+    border-color: var(--text-main);
 }
 
 .confirmationContent {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .summarySection {
     background: var(--bg-main);
-    padding: 20px;
-    border-radius: 12px;
+    padding: 2rem;
+    border-radius: var(--radius-l);
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.summarySection::-webkit-scrollbar {
-    background-color: transparent;
-    width: 5px;
-}
-
-.summarySection::-webkit-scrollbar-thumb {
-    background-color: var(--text-secondary);
-    opacity: 0.5;
-    border-radius: 10px;
+    gap: 1.5rem;
 }
 
 .summarySection h2 {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     color: var(--text-secondary);
-    margin: 0;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.6rem;
+    padding-bottom: 0.75rem;
+    margin: 0;
 }
 
 .summaryRow {
     display: flex;
     justify-content: space-between;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-main);
+    font-weight: 500;
 }
 
 .summaryRow span:last-child {
-    font-weight: 600;
+    font-weight: 800;
+    color: var(--primary);
 }
 
 .missionsSummaryList {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .missionSummaryItem {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: var(--bg-card);
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: var(--radius-s);
+    border: 1px solid var(--glass-border);
     color: var(--text-main);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .mainPeriode {
-        grid-template-columns: 1fr;
-        height: auto;
-        min-height: auto;
-    }
-
     .periodeCard {
         padding: 1.5rem;
+        max-height: 98%;
+        gap: 1rem;
     }
 
     .periodeTitle {
         font-size: 1.75rem;
     }
 
-    .habit-selection-group {
-        height: auto;
-        max-height: 300px;
+    .mainPeriode {
+        gap: 1.5rem;
+        grid-template-columns: 1fr;
     }
 }

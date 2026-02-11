@@ -1,95 +1,168 @@
-.infoDiv {
-    padding: 20px;
-    background: var(--bg-card);
-    border-radius: 12px;
-    width: 100%;
-    box-shadow: 0 4px 6px -1px var(--shadow-color);
-    border: 1px solid var(--border-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    color: var(--text-main);
-}
-
-.infoDiv:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px var(--shadow-color);
-}
-
-.infoDiv h1 {
-    font-size: min(32px, 6vw);
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 0.5rem;
-}
-
-.infoDiv p {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-}
-
-.infoDiv h2 {
-    font-size: min(10vw, 48px);
-    text-align: center;
-    font-weight: 700;
-    color: var(--primary);
-    margin-top: 1rem;
-}
-
 .infoDivCont {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    perspective: 1000px;
+}
+
+.infoDiv {
+    padding: 1.75rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-l);
+    width: 100%;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--glass-border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    color: var(--text-main);
+    position: relative;
+    overflow: hidden;
+}
+
+.infoDiv::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.infoDiv:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    background: var(--glass-bg);
+}
+
+.infoDiv:hover::before {
+    opacity: 1;
+}
+
+.infoDiv h1 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.infoDiv p {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.infoDiv h2 {
+    font-size: 2.5rem;
+    text-align: right;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 1rem;
+    letter-spacing: -0.03em;
+}
+
+/* Financial Status for Info Cards */
+.infoDivCont.warning .infoDiv {
+    border-color: var(--warning);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.infoDivCont.warning h2 {
+    background: var(--warning);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.infoDivCont.danger .infoDiv {
+    border-color: var(--danger);
+    background: rgba(239, 68, 68, 0.1);
+    animation: card-pulse 2s infinite ease-in-out;
+}
+
+.infoDivCont.danger h2 {
+    background: var(--danger);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@keyframes card-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2);
+    }
 }
 
 .infoDiv .inofTools {
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .infoDiv .inofTools button {
-    border: none;
-    background-color: transparent;
+    border: 1px solid var(--border-color);
+    background: var(--bg-main);
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-secondary);
-    transition: color 0.2s;
+    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
-    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
 }
 
 .infoDiv .inofTools button:hover {
-    color: var(--primary);
-    background-color: var(--bg-main);
+    color: white;
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.infoDiv .inofTools button[aria-label="Delete habit"]:hover {
+    background: var(--danger);
 }
 
 .undo-toast {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 16px;
+    padding: 12px 20px;
     background: var(--bg-card);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--shadow-color);
-    border: 1px solid var(--border-color);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-m);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
 }
 
 .undo-toast button {
-    padding: 6px 12px;
+    padding: 8px 16px;
     background: var(--primary);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
+    transition: opacity 0.2s;
 }
 
 .undo-toast button:hover {
