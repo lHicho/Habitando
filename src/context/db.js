@@ -10,7 +10,7 @@ db.version(1).stores({
     archived_ratings: '++id, userId, habitId, periodId, data',
 })
 
-db.version(3).stores({
+db.version(5).stores({
     users: '++id, email, userData',
     habits: '++id, userId, name, habitData',
     daily_ratings: '++id, userId, habitId, date, periodId, [userId+periodId], [userId+habitId], [userId+date]',
@@ -18,5 +18,7 @@ db.version(3).stores({
     archived_ratings: '++id, userId, habitId, periodId, data',
     finance_settings: '++id, userId',
     daily_expenses: '++id, userId, date, [userId+date]',
-    expenses: '++id, userId, date, category, amount'
+    expenses: '++id, userId, date, category, amount',
+    streaks: '++id, userId, name, type',
+    streak_logs: '++id, userId, streakId, date, status, [userId+streakId], [userId+date]'
 });

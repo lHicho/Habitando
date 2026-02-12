@@ -35,11 +35,12 @@ export default function Sidebar() {
                 <ul className="linksList">
                     <p onClick={() => goto("/")}>Home</p>
                     <p onClick={() => goto("/habitsLab")}>Habits Lab</p>
+                    <p onClick={() => goto("/streakLab")}>Streak Lab</p>
                     <p onClick={() => goto("/periodeLab")}>Periode Lab</p>
                     <p onClick={() => goto("/progressLab")}>Progress Lab</p>
-                    <p onClick={() => goto("/profile")}>Profile</p>
                     <p onClick={() => goto("/finance")}>Finance</p>
                     <p onClick={() => goto("/daily")}>Daily</p>
+                    <p onClick={() => goto("/profile")}>Profile</p>
                 </ul>
             </div>
             <div onClick={closeSidebar} id="overflowDiv" className={(isOpen) ? "overflowDiv overflowOn" : "overflowDiv overflowOff"}>

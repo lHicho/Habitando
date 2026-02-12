@@ -21,6 +21,7 @@ const Habits = lazy(() => import("./components/habits/habits.jsx"))
 const PeriodeLab = lazy(() => import("./pages/periodeLab/periodeLab.jsx"))
 const ProgressLab = lazy(() => import("./pages/progressLab/progressLab.jsx"))
 const Finance = lazy(() => import("./pages/finance/finance.jsx"))
+const StreakLab = lazy(() => import("./pages/streakLab/streakLab.jsx"))
 
 const Layout = () => {
     return (
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
             {
                 path: "/finance",
                 element: <ProtectedRoute><Suspense fallback={<PageFallback />}><Finance /></Suspense></ProtectedRoute>
+            },
+            {
+                path: "/streakLab",
+                element: <ProtectedRoute><Suspense fallback={<PageFallback />}><StreakLab /></Suspense></ProtectedRoute>
             }
         ]
     },

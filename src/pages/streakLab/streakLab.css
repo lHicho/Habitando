@@ -1,0 +1,131 @@
+.streak-lab-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.streak-lab-container::-webkit-scrollbar {
+    display: none;
+}
+
+.streak-lab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    gap: 2rem;
+}
+
+.header-info h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, #ff4d4d, #f9cb28);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.header-icon {
+    color: #ff4d4d;
+    -webkit-text-fill-color: initial;
+}
+
+.header-info p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.add-streak-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 1rem 1.75rem;
+    border-radius: var(--radius-m);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.add-streak-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+}
+
+.streaks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.empty-streaks {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    border: 1px dashed var(--glass-border);
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: var(--text-secondary);
+    opacity: 0.3;
+    margin-bottom: 1.5rem;
+}
+
+.empty-streaks h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-streaks p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.empty-streaks button {
+    background: var(--bg-main);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-m);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.empty-streaks button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .streak-lab-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .add-streak-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

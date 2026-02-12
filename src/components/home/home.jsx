@@ -11,6 +11,7 @@ import { useEffect, useState, useMemo } from "react"
 import { db } from "../../context/db.js"
 import { parseISO, differenceInDays } from "date-fns"
 import { useLiveQuery } from "dexie-react-hooks"
+import { calculateStreak } from "../../utils/streakUtils"
 
 export default function Home() {
     const { userInfo, activePeriod } = useUser()
@@ -107,6 +108,25 @@ export default function Home() {
         return { left, daily, status };
     }, [financeSettings, allExpenses]);
 
+    const bestStreakData = useLiveQuery(
+        async () => {
+            if (!userInfo?.id) return { current: 0, highest: 0, habitName: "No streaks yet" };
+            const streaks = await db.streaks.where({ userId: userInfo.id }).toArray();
+            if (streaks.length === 0) return { current: 0, highest: 0, habitName: "No streaks yet" };
+
+            let overallBest = { current: 0, highest: 0, habitName: "None" };
+
+            for (const streak of streaks) {
+                const stats = await calculateStreak(streak.id, userInfo.id);
+                if (stats.highest > overallBest.highest) {
+                    overallBest = { ...stats, habitName: streak.name };
+                }
+            }
+            return overallBest;
+        },
+        [userInfo?.id]
+    );
+
     return (
         <>
             <Header />
@@ -136,6 +156,13 @@ export default function Home() {
                         info={`${financialInfo.daily} MAD Daily`}
                         to="/finance"
                         className={financialInfo.status}
+                    />
+                    <Info
+                        tools={false}
+                        title="Best Streak"
+                        description={bestStreakData?.habitName || "Start a journey"}
+                        info={`${bestStreakData?.highest || 0} Days`}
+                        to="/streakLab"
                     />
                 </div>
             </div>

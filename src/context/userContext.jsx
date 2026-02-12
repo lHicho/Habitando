@@ -204,6 +204,18 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const updateUserProfile = async (updatedData) => {
+        if (!userInfo?.id) return 500;
+        try {
+            await db.users.update(userInfo.id, updatedData);
+            setUserInfo(prev => ({ ...prev, ...updatedData }));
+            return 200;
+        } catch (err) {
+            console.error("updateUserProfile error:", err);
+            return 500;
+        }
+    }
+
     const startPeriod = async (periodData) => {
         if (!userInfo?.id) return 500; // Error if no user
 
@@ -228,7 +240,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ userInfo, updateInfo, addUser, deleteUser, signIn, signOut, addHabit, editHabit, getInfo, selectedHabit, activePeriod, getHabits, startPeriod, updateAvatar }}>
+        <UserContext.Provider value={{ userInfo, updateInfo, addUser, deleteUser, signIn, signOut, addHabit, editHabit, getInfo, selectedHabit, activePeriod, getHabits, startPeriod, updateAvatar, updateUserProfile }}>
             {children}
         </UserContext.Provider>
     )
